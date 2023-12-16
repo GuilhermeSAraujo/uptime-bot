@@ -17,7 +17,7 @@ myIntents.add(
   GatewayIntentBits.Guilds
 );
 
-import { MongoClient } from "mongodb"; // hFuBTb5y5nZBxj5b
+import { MongoClient } from "mongodb";
 
 
 const mongoClient = new MongoClient(connectionString);
@@ -65,7 +65,6 @@ const main = async () => {
   });
 
   client.on("voiceStateUpdate", async (oldState, newState) => {
-    // Check if the user has joined a voice channel
     if (!oldState.channelId && newState.channelId) {
       console.log(
         `User ${newState.member.user.tag} joined voice channel ${newState.channel.name}`
@@ -121,7 +120,16 @@ const main = async () => {
           serverId: oldState.guild.id
         });
 
-        if (!user) return;
+        if (!user) {
+          await uptimeDb.insertOne({
+            user: oldState.member.user.tag,
+            totalMinutesOnline: 0,
+            lastTimeEntered: new Date(),
+            serverId: oldState.guild.id,
+            userName: oldState.member.user.displayName
+          });
+          return;
+        };
 
         const differenceInMilliseconds = new Date() - user.lastTimeEntered;
         const minutesOnline = Math.ceil(differenceInMilliseconds / 1000 / 60);
