@@ -9,6 +9,7 @@ const token = process.env.DISCORD_TOKEN || "";
 
 const myIntents = new IntentsBitField();
 
+// Bot permissions
 myIntents.add(
   IntentsBitField.Flags.Guilds,
   IntentsBitField.Flags.GuildMessages,
@@ -50,7 +51,7 @@ const main = async () => {
     }
   });
 
-  // Running 
+  // Running cronjob every 5 minutes
   cron.schedule('*/5 * * * *', async () => {
     await updateOnlineUsers();
   });
