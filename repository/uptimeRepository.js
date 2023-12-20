@@ -34,7 +34,8 @@ const updateTotalMinutesOnline = async ({ uptimeId, serverId, totalMinutesOnline
 	await uptimeDb.updateOne({ _id: uptimeId, serverId }, {
 		$set: {
 			isOnline: isOnline,
-			totalMinutesOnline: totalMinutesOnline
+			totalMinutesOnline: totalMinutesOnline,
+			lastTimeEntered: new Date()
 		}
 	});
 }
@@ -47,10 +48,19 @@ const getAllUsersFromServer = async ({ serverId }) => {
 	return users;
 };
 
+const getAllUsersOnline = async () => {
+	const users = await uptimeDb.find({ isOnline: true })
+		.sort({ serverId: ORDER_BY_DESC })
+		.toArray();
+
+	return users;
+};
+
 export {
 	getUserByTagAndServerId,
 	insertNewUser,
 	updateLastTimeEntered,
 	updateTotalMinutesOnline,
-	getAllUsersFromServer
+	getAllUsersFromServer,
+	getAllUsersOnline
 }

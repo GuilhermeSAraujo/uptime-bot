@@ -1,7 +1,9 @@
 import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
+import cron from 'node-cron';
 import { enteredChannel } from "./useCases/enteredChannel.js";
 import { leaveChannel } from "./useCases/leaveChannel.js";
 import { usersUptime } from "./useCases/commands/usersUptime.js";
+import { updateOnlineUsers } from "./useCases/updateOnlineUsers.js";
 
 const token = "";
 
@@ -16,10 +18,6 @@ myIntents.add(
   GatewayIntentBits.GuildVoiceStates,
   GatewayIntentBits.Guilds
 );
-
-
-
-// const mongoClient = new MongoClient(connectionString);
 
 const main = async () => {
   const client = new Client({ intents: myIntents });
@@ -50,6 +48,11 @@ const main = async () => {
       await leaveChannel(oldState);
       return;
     }
+  });
+
+  cron.schedule('*/5 * * * *', async () => {
+    console.log('Running a task every 5 minutes');
+    await updateOnlineUsers();
   });
 
   client.login(token);
