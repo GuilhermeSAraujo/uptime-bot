@@ -41,12 +41,14 @@ const main = async () => {
   });
 
   client.on("voiceStateUpdate", async (oldState, newState) => {
-    // user entered the voice channel
     if (!oldState.channelId && newState.channelId) {
       await enteredChannel(newState);
+      return;
     }
+
     if (oldState.channelId && !newState.channelId) {
       await leaveChannel(oldState);
+      return;
     }
   });
 
