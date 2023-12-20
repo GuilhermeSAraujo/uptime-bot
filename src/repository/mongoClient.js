@@ -1,6 +1,8 @@
+import 'dotenv/config'
 import { MongoClient } from "mongodb";
 
-const connectionString = "";
+const connectionString = process.env.MONGO_CONNECTION || "";
+
 const mongoClient = new MongoClient(connectionString, {
 	minPoolSize: 5, maxPoolSize: 30
 });

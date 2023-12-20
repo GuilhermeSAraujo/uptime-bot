@@ -1,11 +1,11 @@
-import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
 import cron from 'node-cron';
-import { enteredChannel } from "./useCases/enteredChannel.js";
-import { leaveChannel } from "./useCases/leaveChannel.js";
-import { usersUptime } from "./useCases/commands/usersUptime.js";
-import { updateOnlineUsers } from "./useCases/updateOnlineUsers.js";
+import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
+import { enteredChannel } from "./src/useCases/enteredChannel.js";
+import { leaveChannel } from "./src/useCases/leaveChannel.js";
+import { usersUptime } from "./src/useCases/commands/usersUptime.js";
+import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers.js";
 
-const token = "";
+const token = process.env.DISCORD_TOKEN || "";
 
 const myIntents = new IntentsBitField();
 
@@ -23,7 +23,7 @@ const main = async () => {
   const client = new Client({ intents: myIntents });
 
   client.on("ready", (msg) => {
-    console.log("The UptimeBot  is online"); //message when bot is online
+    console.log("The UptimeBot is online 🟢");
   });
 
   client.on("messageCreate", async (msg) => {
@@ -50,8 +50,8 @@ const main = async () => {
     }
   });
 
+  // Running 
   cron.schedule('*/5 * * * *', async () => {
-    console.log('Running a task every 5 minutes');
     await updateOnlineUsers();
   });
 
