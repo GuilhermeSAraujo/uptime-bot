@@ -9,7 +9,6 @@ const token = process.env.DISCORD_TOKEN || "";
 
 const myIntents = new IntentsBitField();
 
-// Bot permissions
 myIntents.add(
   IntentsBitField.Flags.Guilds,
   IntentsBitField.Flags.GuildMessages,
