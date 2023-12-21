@@ -10,22 +10,24 @@ const getUserByTagAndServerId = async ({ tag, serverId }) => {
 	return user;
 };
 
-const insertNewUser = async ({ tag, displayName, serverId, isOnline }) => {
+const insertNewUser = async ({ tag, displayName, serverId, isOnline, serverName }) => {
 	await uptimeDb.insertOne({
 		user: tag,
 		totalMinutesOnline: 0,
 		isOnline: isOnline,
 		lastTimeEntered: new Date(),
 		serverId: serverId,
-		userName: displayName
+		userName: displayName,
+		serverName: serverName
 	});
 };
 
-const updateLastTimeEntered = async ({ uptimeId, serverId, time, isOnline }) => {
+const updateLastTimeEntered = async ({ uptimeId, serverId, time, isOnline, serverName }) => {
 	await uptimeDb.updateOne({ _id: uptimeId, serverId }, {
 		$set: {
 			lastTimeEntered: time,
-			isOnline: isOnline
+			isOnline: isOnline,
+			serverName: serverName
 		}
 	});
 }

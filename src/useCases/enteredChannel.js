@@ -18,12 +18,19 @@ const enteredChannel = async (newState) => {
 				serverId: newState.guild.id,
 				displayName: newState.member.user.displayName,
 				isOnline: true,
+				serverName: newState.guild.name
 			});
 
 			return;
 		}
 
-		await updateLastTimeEntered({ uptimeId: user._id, serverId: newState.guild.id, time: new Date(), isOnline: true });
+		await updateLastTimeEntered({
+			uptimeId: user._id,
+			serverId: newState.guild.id,
+			time: new Date(),
+			isOnline: true,
+			serverName: newState.guild.name
+		});
 
 	} catch (e) {
 		console.log(e);
