@@ -24,7 +24,7 @@ const main = async () => {
   const client = new Client({ intents: myIntents });
 
   client.on("ready", (msg) => {
-    console.log("The UptimeBot is online 🟢");
+    console.log("The UptimeBot is online 🟢", new Date());
   });
 
   client.on("messageCreate", async (msg) => {
