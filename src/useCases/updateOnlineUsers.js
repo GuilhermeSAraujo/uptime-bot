@@ -1,7 +1,9 @@
 import { getAllUsersOnline, updateTotalMinutesOnline } from '../repository/uptimeRepository.js';
 
 const updateOnlineUsers = async () => {
+	console.log("Starting update uptime routine", new Date());
 	const allUsers = await getAllUsersOnline();
+
 	console.log("Total users online", allUsers.length);
 	const usersByServer = groupUsersByServerId(allUsers);
 
@@ -20,6 +22,8 @@ const updateOnlineUsers = async () => {
 				isOnline: user.isOnline
 			});
 		}
+
+		console.log("Routine finished", new Date());
 	}
 };
 
