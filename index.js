@@ -4,6 +4,7 @@ import { enteredChannel } from "./src/useCases/enteredChannel.js";
 import { leaveChannel } from "./src/useCases/leaveChannel.js";
 import { usersUptime } from "./src/useCases/commands/usersUptime.js";
 import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers.js";
+import { allUsersUptime } from './src/useCases/commands/allUsersUptime.js';
 
 const token = process.env.DISCORD_TOKEN || "";
 
@@ -34,6 +35,10 @@ const main = async () => {
 
       if (msg.content === "/uptime") {
         await usersUptime(msg);
+      }
+
+      if (msg.content === "/uptimeAll") {
+        await allUsersUptime(msg);
       }
     }
   });

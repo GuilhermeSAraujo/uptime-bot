@@ -22,9 +22,8 @@ const updateOnlineUsers = async () => {
 				isOnline: user.isOnline
 			});
 		}
-
-		console.log("Routine finished", new Date());
 	}
+	console.log("Routine finished", new Date());
 };
 
 const groupUsersByServerId = (allUsers) => {

@@ -56,11 +56,20 @@ const getAllUsersOnline = async () => {
 	return users;
 };
 
+const getAllUsers = async () => {
+	const users = await uptimeDb.find({})
+		.sort({ totalMinutesOnline: ORDER_BY_DESC })
+		.toArray();
+
+	return users;
+};
+
 export {
 	getUserByTagAndServerId,
 	insertNewUser,
 	updateLastTimeEntered,
 	updateTotalMinutesOnline,
 	getAllUsersFromServer,
-	getAllUsersOnline
+	getAllUsersOnline,
+	getAllUsers
 }
