@@ -3,11 +3,7 @@ import { formatTime } from '../../utils/dateTimeUtils.js';
 
 const usersUptime = async (msg) => {
 	try {
-		console.log('userName', msg.author.username);
-
 		const userData = await getUserDataByUser(msg.author.username);
-
-		console.log('userData', userData);
 
 		const userDataOnServer = userData.find(u => u.serverId === msg.guildId);
 
