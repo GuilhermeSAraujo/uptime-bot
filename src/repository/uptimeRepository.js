@@ -66,12 +66,15 @@ const getAllUsers = async () => {
 	return users;
 };
 
+const getUserDataByUser = async (user) => {
+	const userData = await uptimeDb.find({ user }).toArray();
+
+	return userData;
+};
+
 export {
-	getUserByTagAndServerId,
-	insertNewUser,
+	getAllUsers, getAllUsersFromServer,
+	getAllUsersOnline, getUserByTagAndServerId, getUserDataByUser, insertNewUser,
 	updateLastTimeEntered,
-	updateTotalMinutesOnline,
-	getAllUsersFromServer,
-	getAllUsersOnline,
-	getAllUsers
-}
+	updateTotalMinutesOnline
+};

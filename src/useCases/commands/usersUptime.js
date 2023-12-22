@@ -1,16 +1,24 @@
-import { getAllUsersFromServer } from '../../repository/uptimeRepository.js';
+import { getUserDataByUser } from '../../repository/uptimeRepository.js';
 import { formatTime } from '../../utils/dateTimeUtils.js';
 
 const usersUptime = async (msg) => {
 	try {
-		const users = await getAllUsersFromServer({ serverId: msg.guildId });
+		console.log('userName', msg.author.username);
 
-		let text = `Tempo dos usuários no servidor: ${msg.guild.name}\n`;
+		const userData = await getUserDataByUser(msg.author.username);
 
-		users.forEach((u, index) => {
-			const formattedTime = formatTime(u.totalMinutesOnline);
-			text += `${index + 1}° - ${u.userName} - ${formattedTime}.\n`;
+		console.log('userData', userData);
+
+		const userDataOnServer = userData.find(u => u.serverId === msg.guildId);
+
+		let text = `Tempo conectado no servidor ${msg.guild.name}: **${formatTime(userDataOnServer.totalMinutesOnline)}**.\n`;
+
+		let totalUptime = 0;
+		userData.forEach(register => {
+			totalUptime += register.totalMinutesOnline;
 		});
+
+		text += `Tempo total conectado nos servidores com UptimeBot: **${formatTime(totalUptime)}**.`;
 
 		msg.reply(text);
 		return;
@@ -19,4 +27,4 @@ const usersUptime = async (msg) => {
 	}
 };
 
-export { usersUptime }
+export { usersUptime };

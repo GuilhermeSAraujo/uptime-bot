@@ -1,10 +1,11 @@
-import cron from 'node-cron';
 import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
+import cron from 'node-cron';
+import { allUsersUptime } from './src/useCases/commands/allUsersUptime.js';
+import { serversUptime } from './src/useCases/commands/serversUptime.js';
+import { usersUptime } from "./src/useCases/commands/usersUptime.js";
 import { enteredChannel } from "./src/useCases/enteredChannel.js";
 import { leaveChannel } from "./src/useCases/leaveChannel.js";
-import { usersUptime } from "./src/useCases/commands/usersUptime.js";
 import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers.js";
-import { allUsersUptime } from './src/useCases/commands/allUsersUptime.js';
 
 const token = process.env.DISCORD_TOKEN || "";
 
@@ -37,11 +38,16 @@ const main = async () => {
         await usersUptime(msg);
       }
 
+      if (msg.content === "/uptimeServer") {
+        await serversUptime(msg);
+      }
+
       if (msg.content === "/uptimeAll") {
         await allUsersUptime(msg);
       }
     }
   });
+
 
   client.on("voiceStateUpdate", async (oldState, newState) => {
     if (!oldState.channelId && newState.channelId) {
