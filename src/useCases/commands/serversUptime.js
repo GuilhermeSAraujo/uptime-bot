@@ -9,7 +9,7 @@ const serversUptime = async (msg) => {
 
 		users.forEach((u, index) => {
 			const formattedTime = formatTime(u.totalMinutesOnline);
-			text += `${index + 1}° - ${u.userName} - ${formattedTime}.\n`;
+			text += `${index + 1}° - ${u.userName} - **${formattedTime}**.\n`;
 		});
 
 		msg.reply(text);
