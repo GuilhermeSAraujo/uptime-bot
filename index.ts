@@ -1,11 +1,13 @@
 import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
 import cron from 'node-cron';
-import { allUsersUptime } from './src/useCases/commands/allUsersUptime.js';
-import { serversUptime } from './src/useCases/commands/serversUptime.js';
-import { usersUptime } from "./src/useCases/commands/usersUptime.js";
-import { enteredChannel } from "./src/useCases/enteredChannel.js";
-import { leaveChannel } from "./src/useCases/leaveChannel.js";
-import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers.js";
+import { serversUptime } from './src/useCases/commands/serversUptime';
+import { usersUptime } from "./src/useCases/commands/usersUptime";
+import { enteredChannel } from "./src/useCases/enteredChannel";
+import { leaveChannel } from "./src/useCases/leaveChannel";
+import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers";
+import { config } from "dotenv";
+
+config();
 
 const token = process.env.DISCORD_TOKEN || "";
 
@@ -42,8 +44,8 @@ const main = async () => {
         await serversUptime(msg);
       }
 
-      if (msg.content === "/uptimeAll") {
-        await allUsersUptime(msg);
+      if (msg.content === "/uptimeHelp") {
+        msg.reply(`**/uptime**: para saber seu tempo online;\n**/uptimeServer**: para saber o TOP10 do servidor.`);
       }
     }
   });
@@ -62,9 +64,13 @@ const main = async () => {
   });
 
   // Running cronjob every 5 minutes
-  cron.schedule('*/5 * * * *', async () => {
+  // cron.schedule('*/5 * * * *', async () => {
+  //   await updateOnlineUsers();
+  // });
+  cron.schedule('* * * * *', async () => {
     await updateOnlineUsers();
   });
+
 
   client.login(token);
 };
