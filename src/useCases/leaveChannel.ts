@@ -21,7 +21,7 @@ const leaveChannel = async (oldState: VoiceState) => {
 			await createExit({ id: currentSession.id, duration: minutesOnline });
 		}
 	} catch (e) {
-		console.log(e);
+		console.error(e);
 	}
 }
 

@@ -64,10 +64,7 @@ const main = async () => {
   });
 
   // Running cronjob every 5 minutes
-  // cron.schedule('*/5 * * * *', async () => {
-  //   await updateOnlineUsers();
-  // });
-  cron.schedule('* * * * *', async () => {
+  cron.schedule('*/5 * * * *', async () => {
     await updateOnlineUsers();
   });
 

@@ -40,7 +40,7 @@ const enteredChannel = async (newState: VoiceState) => {
 		await createEntry({ userId, serverId });
 
 	} catch (e) {
-		console.log(e);
+		console.error(e);
 	}
 }
 

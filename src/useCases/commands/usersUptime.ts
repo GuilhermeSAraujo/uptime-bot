@@ -14,7 +14,6 @@ const usersUptime = async (msg: Message) => {
 			const userUptime = await getUserUptime({
 				userId, serverId
 			});
-			console.log('userUptime', userUptime);
 			message += `Tempo conectado no servidor ${serverName}: **${formatTime(userUptime)}**.\n`;
 		}
 
