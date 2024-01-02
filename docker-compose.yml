@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  db:
+    hostname: database
+    image: postgres
+    command: "postgres -c shared_buffers=256MB -c fsync=off -c full_page_writes=off -c max_connections=450"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: uptime-bot   
+  bot-service:
+    build: .
+    command: npx ts-node ./index.ts
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    depends_on:
+      - db
+
+networks:
+  default:
+    driver: bridge
+    name: network
