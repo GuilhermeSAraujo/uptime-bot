@@ -32,19 +32,21 @@ const main = async () => {
 
   client.on("messageCreate", async (msg) => {
     if (msg.content[0] === "/") {
-      if (msg.content === "/ping") {
+      const command = msg.content.toLocaleLowerCase();
+
+      if (command === "/ping") {
         msg.reply("pong");
       }
 
-      if (msg.content === "/uptime") {
+      if (command === "/uptime") {
         await usersUptime(msg);
       }
 
-      if (msg.content === "/uptimeServer") {
+      if (command === "/uptimeserver") {
         await serversUptime(msg);
       }
 
-      if (msg.content === "/uptimeHelp") {
+      if (command === "/uptimehelp") {
         msg.reply(`**/uptime**: para saber seu tempo online;\n**/uptimeServer**: para saber o TOP10 do servidor.`);
       }
     }
