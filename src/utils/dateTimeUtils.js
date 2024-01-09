@@ -1,8 +1,8 @@
 const formatTime = (minutes) => {
 	const days = Math.floor(minutes / 1440);
-	minutes -= days * 1440; // 1440 = minutes in a day
+	minutes -= days * 1440;
 	const hours = Math.floor(minutes / 60);
-	minutes -= hours * 60; // 60 = minutes in an hour
+	minutes -= hours * 60;
 
 	let result = '';
 	if (days) result += `${days} ${days <= 1 ? "dia" : "dias"} `;
