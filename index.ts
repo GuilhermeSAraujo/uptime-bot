@@ -1,11 +1,13 @@
 import { Client, GatewayIntentBits, IntentsBitField } from "discord.js";
 import cron from 'node-cron';
-import { allUsersUptime } from './src/useCases/commands/allUsersUptime.js';
-import { serversUptime } from './src/useCases/commands/serversUptime.js';
-import { usersUptime } from "./src/useCases/commands/usersUptime.js";
-import { enteredChannel } from "./src/useCases/enteredChannel.js";
-import { leaveChannel } from "./src/useCases/leaveChannel.js";
-import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers.js";
+import { serversUptime } from './src/useCases/commands/serversUptime';
+import { usersUptime } from "./src/useCases/commands/usersUptime";
+import { enteredChannel } from "./src/useCases/enteredChannel";
+import { leaveChannel } from "./src/useCases/leaveChannel";
+import { updateOnlineUsers } from "./src/useCases/updateOnlineUsers";
+import { config } from "dotenv";
+
+config();
 
 const token = process.env.DISCORD_TOKEN || "";
 
@@ -30,20 +32,22 @@ const main = async () => {
 
   client.on("messageCreate", async (msg) => {
     if (msg.content[0] === "/") {
-      if (msg.content === "/ping") {
+      const command = msg.content.toLocaleLowerCase();
+
+      if (command === "/ping") {
         msg.reply("pong");
       }
 
-      if (msg.content === "/uptime") {
+      if (command === "/uptime") {
         await usersUptime(msg);
       }
 
-      if (msg.content === "/uptimeServer") {
+      if (command === "/uptimeserver") {
         await serversUptime(msg);
       }
 
-      if (msg.content === "/uptimeAll") {
-        await allUsersUptime(msg);
+      if (command === "/uptimehelp") {
+        msg.reply(`**/uptime**: para saber seu tempo online;\n**/uptimeServer**: para saber o TOP10 do servidor.`);
       }
     }
   });
@@ -65,6 +69,7 @@ const main = async () => {
   cron.schedule('*/5 * * * *', async () => {
     await updateOnlineUsers();
   });
+
 
   client.login(token);
 };

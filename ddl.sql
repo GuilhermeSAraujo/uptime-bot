@@ -1,0 +1,25 @@
+ALTER SCHEMA PUBLIC OWNER TO root;
+
+SET default_tablespace = '';
+SET TIME ZONE '-3';
+
+CREATE TABLE IF NOT EXISTS person (
+	"id" VARCHAR(20) NOT NULL PRIMARY KEY,
+	"display_name" VARCHAR(256),
+	"tag" VARCHAR(256)
+);
+
+CREATE TABLE IF NOT EXISTS server (
+    "id" VARCHAR(20) NOT NULL PRIMARY KEY,
+    "name" VARCHAR(256)
+);
+
+CREATE TABLE IF NOT EXISTS time_track (
+	"id" SERIAL PRIMARY KEY,
+	"person_id" VARCHAR(20) NOT NULL REFERENCES person("id"),
+    "server_id" VARCHAR(20) NOT NULL REFERENCES server("id"),
+	"enter_time" TIMESTAMP WITH TIME ZONE NOT NULL,
+	"leave_time" TIMESTAMP WITH TIME ZONE,
+	"duration" INT NOT NULL DEFAULT 0
+);
+
