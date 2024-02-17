@@ -23,6 +23,12 @@ Use cases of the commands:
 ![uptime usuáruio](./assets/uptimeServer3.png)
 ![uptimeHelp /uptimeServer4](./assets/uptimeServer4.png)
 
+```
+TOP10 users         |  
+:-------------------------:|:-------------------------:
+![uptimeServer - servidor X](./assets/uptimeServer1.png)  |  ![uptimeServer servidor Y](./assets/uptimeServer2.png)
+```
+
 ## Acknowledgments
 
 Thanks to Discord's robust API, developing this bot and learning about these topics was made possible.
