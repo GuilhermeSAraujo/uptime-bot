@@ -21,7 +21,6 @@ Use cases of the commands:
 TOP10 users command | TOP10 users command
 :-------------------------:|:-------------------------:
 ![uptimeServer - servidor X](./assets/uptimeServer1.png)  |  ![uptimeServer servidor Y](./assets/uptimeServer2.png)
-:-------------------------:|:-------------------------:
 All uptime from user | Help command
 ![uptime usuáruio](./assets/uptimeServer3.png)  |  ![uptimeHelp /uptimeServer4](./assets/uptimeServer4.png)
 
