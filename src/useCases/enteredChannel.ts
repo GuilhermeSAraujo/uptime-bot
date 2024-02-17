@@ -15,7 +15,6 @@ const enteredChannel = async (newState: VoiceState) => {
 			return;
 		}
 
-
 		const user = await getUserById(userId);
 
 		const server = await getServerById(serverId);
