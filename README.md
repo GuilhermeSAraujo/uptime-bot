@@ -1,41 +1,28 @@
 
-# Uptime Bot
+# UptimeBot
 
-## Description
+UptimeBot is a Discord bot designed to measure users' online time in servers.
 
-Uptime Bot is a unique Discord bot designed to track and log the amount of time users spend online in voice channels. It uses MongoDB to store user data and time, offering server-specific tracking. This bot is perfect for communities looking to reward active members or monitor user engagement.
+## How It Works
 
-## Features
+Every time you enter a voice channel, the bot creates a record with the date and time. When you leave the channel, it calculates the difference between the entered and left times and saves the duration.
+To maintain near real-time accuracy, a cron job runs every 5 minutes, updating all online users who are currently in voice channels.
 
--   **User Time Tracking**: Accurately logs the time each user spends in voice channels.
--   **Server-Specific Data**: Tracks user activity separately for each server.
--   **Data Storage**: Utilizes MongoDB for efficient and reliable data storage.
--   **Activity Reports**: Generate reports on user activity upon request.
+## Purpose and Development
 
-## Installation
+This bot was created by  [@me](https://github.com/GuilhermeSAraujo)  as a learning tool to enhance my understanding of backend applications using Node.js with TypeScript, MongoDB (v1 was initially created on Mongo, then migrated to Postgres), Dockerization, AWS EC2, and more.
 
-1.  Invite the bot to your server by clicking  [here](https://imagine.wpp.ai/9cbac72b-c9aa-4ee1-ade5-68805b078f90/insert-bot-invite-link-here).
-2.  Ensure you have the necessary permissions to add the bot.
-3.  Follow the prompts to authorize the bot and verify the captcha.
+## Hosting and Feedback
 
-## Usage
+The bot was hosted on the AWS EC2 console for approximately two months across eight different servers. During this period, user feedback was crucial in assessing the consistency of the time tracking feature.
 
-Here are some example commands you can use:
+Use cases of the commands:
 
--   `!uptime @username`  - Shows how much time a user has spent in voice channels.
--   `!serverstats`  - Provides statistics about the server's voice channel usage.
--   `!topactive`  - Displays the most active users in voice channels.
+| ![uptimeServer - servidor X](./assets/uptimeServer1.png) | ![uptimeServer servidor Y](./assets/uptimeServer2.png)
+![uptimeServer servidor Y](./assets/uptimeServer2.png)
+![uptime usuáruio](./assets/uptimeServer3.png)
+![uptimeHelp /uptimeServer4](./assets/uptimeServer4.png)
 
-For a full list of commands, type  `!help`  in your server after adding the bot.
+## Acknowledgments
 
-## Support
-
-If you encounter any issues or need further assistance, please join our  [support server](https://imagine.wpp.ai/9cbac72b-c9aa-4ee1-ade5-68805b078f90/insert-support-server-link-here).
-
-## Contributing
-
-We welcome contributions to Uptime Bot! Please see the  [contributing guide](https://imagine.wpp.ai/9cbac72b-c9aa-4ee1-ade5-68805b078f90/insert-contributing-guide-link-here)  for more information.
-
-## License
-
-This project is licensed under the  [MIT License](https://imagine.wpp.ai/9cbac72b-c9aa-4ee1-ade5-68805b078f90/insert-license-link-here).
+Thanks to Discord's robust API, developing this bot and learning about these topics was made possible.
