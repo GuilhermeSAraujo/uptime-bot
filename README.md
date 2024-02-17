@@ -18,7 +18,7 @@ The bot was hosted on the AWS EC2 console for approximately two months across ei
 
 Use cases of the commands:
 
-| ![uptimeServer - servidor X](./assets/uptimeServer1.png) | ![uptimeServer servidor Y](./assets/uptimeServer2.png)
+![uptimeServer - servidor X](./assets/uptimeServer1.png)
 ![uptimeServer servidor Y](./assets/uptimeServer2.png)
 ![uptime usuáruio](./assets/uptimeServer3.png)
 ![uptimeHelp /uptimeServer4](./assets/uptimeServer4.png)
